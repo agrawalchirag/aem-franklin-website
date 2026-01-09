@@ -25,14 +25,14 @@ footer .footer > div {
   gap: 32px;
 }
 
+footer .footer p {
+  margin: 6px 0;
+  font-size: var(--body-font-size-xs);
+}
+
 footer .footer p:first-child,
 footer .footer p:nth-child(5),
 footer .footer p:nth-child(9) {
   font-weight: 600;
   margin-bottom: 12px;
-}
-
-footer .footer p {
-  margin: 6px 0;
-  font-size: var(--body-font-size-xs);
 }
