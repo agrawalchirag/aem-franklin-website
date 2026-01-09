@@ -1,4 +1,4 @@
-footer {
+/* footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
 }
@@ -17,4 +17,22 @@ footer .footer p {
   footer .footer > div {
     padding: 40px 32px 24px;
   }
+} */
+
+footer .footer > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+footer .footer p:first-child,
+footer .footer p:nth-child(5),
+footer .footer p:nth-child(9) {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+footer .footer p {
+  margin: 6px 0;
+  font-size: var(--body-font-size-xs);
 }
