@@ -119,6 +119,63 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
+  // normalize nav structure so header works with different fragment markup
+  (function normalizeNav() {
+    if (nav.querySelector('.nav-brand') || nav.querySelector('.nav-sections') || nav.querySelector('.nav-tools')) return;
+    const brandWrap = document.createElement('div');
+    const sectionsWrap = document.createElement('div');
+    const toolsWrap = document.createElement('div');
+
+    // brand: prefer element with class 'button', an anchor to '/', or first image
+    let brandElem = nav.querySelector('.button') || nav.querySelector('a[href="/"]') || nav.querySelector('img');
+    if (brandElem) {
+      const candidate = brandElem.closest('div') || brandElem.closest('a') || brandElem;
+      brandWrap.append(candidate);
+    }
+
+    // sections: element that contains the first <ul>
+    const ul = nav.querySelector('ul');
+    if (ul) {
+      const candidate = ul.closest('div') || ul.closest('main') || ul;
+      sectionsWrap.append(candidate);
+    }
+
+    // tools: element that contains a search icon/link or search input
+    const toolsElem = nav.querySelector('.icon-search') || nav.querySelector('a[href*="search"]') || nav.querySelector('input[type="search"]');
+    if (toolsElem) {
+      const candidate = toolsElem.closest('div') || toolsElem.closest('p') || toolsElem;
+      toolsWrap.append(candidate);
+    }
+
+    // fallback: first child -> brand
+    if (!brandWrap.hasChildNodes() && nav.firstElementChild) {
+      brandWrap.append(nav.firstElementChild);
+    }
+
+    // fallback: pick child with most links as sections
+    if (!sectionsWrap.hasChildNodes()) {
+      let maxLinks = 0;
+      let best = null;
+      Array.from(nav.children).forEach((c) => {
+        const count = c.querySelectorAll ? c.querySelectorAll('a').length : 0;
+        if (count > maxLinks) { maxLinks = count; best = c; }
+      });
+      if (best) sectionsWrap.append(best);
+    }
+
+    // fallback: last child -> tools
+    if (!toolsWrap.hasChildNodes()) {
+      const last = nav.lastElementChild;
+      if (last && last !== brandWrap.firstElementChild && last !== sectionsWrap.firstElementChild) {
+        toolsWrap.append(last);
+      }
+    }
+
+    // ensure order: brand, sections, tools
+    nav.textContent = '';
+    nav.append(brandWrap, sectionsWrap, toolsWrap);
+  })();
+
   const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
