@@ -127,7 +127,7 @@ export default async function decorate(block) {
     const toolsWrap = document.createElement('div');
 
     // brand: prefer element with class 'button', an anchor to '/', or first image
-    let brandElem = nav.querySelector('.button') || nav.querySelector('a[href="/"]') || nav.querySelector('img');
+    const brandElem = nav.querySelector('.button') || nav.querySelector('a[href="/"]') || nav.querySelector('img');
     if (brandElem) {
       const candidate = brandElem.closest('div') || brandElem.closest('a') || brandElem;
       brandWrap.append(candidate);
@@ -174,7 +174,7 @@ export default async function decorate(block) {
     // ensure order: brand, sections, tools
     nav.textContent = '';
     nav.append(brandWrap, sectionsWrap, toolsWrap);
-  })();
+  }());
 
   const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
