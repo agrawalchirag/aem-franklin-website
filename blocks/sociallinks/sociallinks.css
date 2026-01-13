@@ -38,12 +38,12 @@
   width: 18px;
   height: 18px;
   display: block;
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .sociallinks .button:hover {
   transform: translateY(-1px);
-  color: #ffffff;
+  color: #fff;
 }
 
 /* platform colors */
@@ -58,20 +58,22 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .sociallinks > div {
     gap: 12px;
     padding: 10px;
   }
+
   .sociallinks .button {
     width: 36px;
     height: 36px;
   }
+
   .sociallinks .button .icon {
     width: 16px;
     height: 16px;
