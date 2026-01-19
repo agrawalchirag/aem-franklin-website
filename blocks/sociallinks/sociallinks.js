@@ -1,45 +1,43 @@
-// Decorator for sociallinks block: replace text with SVG icons and improve accessibility
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
+const ICONS = {
+    facebook: `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.31h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+    </svg>
+  `,
+    twitter: `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733a4.68 4.68 0 0 0 2.048-2.578 9.37 9.37 0 0 1-2.965 1.133 4.66 4.66 0 0 0-7.93 4.248A13.23 13.23 0 0 1 1.671 3.149a4.66 4.66 0 0 0 1.443 6.213 4.64 4.64 0 0 1-2.112-.584v.06a4.66 4.66 0 0 0 3.737 4.566 4.67 4.67 0 0 1-2.104.08 4.66 4.66 0 0 0 4.35 3.234A9.34 9.34 0 0 1 .96 19.54a13.19 13.19 0 0 0 7.548 2.212c9.057 0 14.01-7.496 14.01-13.986 0-.21-.006-.423-.016-.634a10.01 10.01 0 0 0 2.46-2.548z"/>
+    </svg>
+  `,
+    instagram: `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.343 3.608 1.318.975.975 1.256 2.242 1.318 3.608.058 1.266.07 1.646.07 4.84 0 3.204-.012 3.584-.07 4.85-.062 1.366-.343 2.633-1.318 3.608-.975.975-2.242 1.256-3.608 1.318-1.266.058-1.646.07-4.85.07-3.194 0-3.574-.012-4.84-.07-1.366-.062-2.633-.343-3.608-1.318-.975-.975-1.256-2.242-1.318-3.608-.058-1.266-.07-1.646-.07-4.85 0-3.194.012-3.574.07-4.84.062-1.366.343-2.633 1.318-3.608.975-.975 2.242-1.256 3.608-1.318 1.266-.058 1.646-.07 4.84-.07z"/>
+    </svg>
+  `,
+};
+
 export default function decorate(block) {
-  const svg = {
-    facebook: '<svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07C1.86 17.09 5.87 21.18 10.66 21.98v-6.99H8.26v-2.92h2.4V9.41c0-2.38 1.42-3.69 3.6-3.69 1.04 0 2.13.18 2.13.18v2.34h-1.2c-1.18 0-1.55.74-1.55 1.5v1.8h2.64l-.42 2.92h-2.22V22C18.13 21.18 22 17.09 22 12.07z"/></svg>',
-    twitter: '<svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 5.92c-.63.28-1.3.47-2 .56.72-.43 1.27-1.1 1.53-1.9-.68.4-1.44.68-2.25.84A3.53 3.53 0 0016.1 4c-1.95 0-3.53 1.6-3.53 3.57 0 .28.03.55.09.81-2.94-.14-5.55-1.6-7.3-3.8-.3.5-.47 1.08-.47 1.7 0 1.17.6 2.2 1.52 2.8-.56-.02-1.08-.17-1.55-.42v.04c0 1.73 1.24 3.17 2.88 3.5-.3.08-.6.12-.92.12-.22 0-.44-.02-.65-.06.44 1.36 1.74 2.35 3.28 2.38A7.11 7.11 0 012 19.54 10.07 10.07 0 007.29 21c6.07 0 9.39-5.1 9.39-9.53v-.43c.65-.46 1.2-1.03 1.63-1.68-.6.26-1.24.44-1.9.52z"/></svg>',
-    instagram: '<svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.1A4.9 4.9 0 1016.9 13 4.9 4.9 0 0012 8.1zM18.5 6.5a1.1 1.1 0 11-1.1-1.1 1.1 1.1 0 011.1 1.1z"/></svg>',
-  };
+    const ul = document.createElement('ul');
 
-  // find all anchor links inside the block (ensure `.button` class exists)
-  block.querySelectorAll('a').forEach((a) => {
-    if (!a.classList.contains('button')) a.classList.add('button');
-    const title = (a.getAttribute('title') || a.textContent || '').trim().toLowerCase();
-    let key = 'facebook';
-    if (title.includes('insta')) key = 'instagram';
-    else if (title.includes('twitter')) key = 'twitter';
-    else if (title.includes('facebook')) key = 'facebook';
+    [...block.children].forEach((row) => {
+        const li = document.createElement('li');
 
-    // create icon wrapper and visually-hidden label for screen readers
-    const labelText = a.textContent.trim() || a.getAttribute('title') || key;
-    a.innerHTML = '';
-    const iconSpan = document.createElement('span');
-    iconSpan.className = `icon-wrapper ${key}`;
-    iconSpan.innerHTML = svg[key] || svg.facebook;
-    a.appendChild(iconSpan);
+        while (row.firstElementChild) li.append(row.firstElementChild);
+        li.querySelectorAll('a[title]').forEach((a) => {
+            const key = a.title.toLowerCase();
+            if (ICONS[key]) {
+                a.innerHTML = ICONS[key];
+                a.classList.add('sociallinks-icon', `sociallinks-${key}`);
+                a.setAttribute('aria-label', key);
+            }
+        });
 
-    const sr = document.createElement('span');
-    sr.className = 'sr-only';
-    // prefer visible button text for screen readers, fallback to capitalized key
-    sr.textContent = labelText || key.charAt(0).toUpperCase() + key.slice(1);
-    a.appendChild(sr);
+        ul.append(li);
+    });
 
-    // accessibility and behaviour tweaks
-    const href = a.getAttribute('href');
-    if (!href || href === '#') {
-      // use safe hash fallback and prevent navigation for placeholder links
-      a.setAttribute('href', '#');
-      a.setAttribute('role', 'button');
-      a.addEventListener('click', (e) => e.preventDefault());
-    } else {
-      a.setAttribute('target', '_blank');
-      a.setAttribute('rel', 'noopener noreferrer');
-    }
-    a.setAttribute('aria-label', labelText);
-  });
+    block.textContent = '';
+    block.append(ul);
 }
+ 

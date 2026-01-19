@@ -1,38 +1,122 @@
-/* footer {
-  background-color: var(--light-color);
+footer {
   font-size: var(--body-font-size-xs);
+  background-color: #fff;
+  color: #202020;
+  margin-top: 3rem;
+  padding: 0;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+/* First section: header-style navigation */
+footer .footer .section:first-child {
+  background-color: #202020;
+  border-bottom: none;
+  padding: 0;
 }
 
-footer .footer p {
+footer .footer .section:first-child .default-content-wrapper {
   margin: 0;
-}
-
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
-} */
-
-footer .footer > div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  max-width: 1264px;
+  padding: 0 32px;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 32px;
 }
 
-footer .footer p {
-  margin: 6px 0;
-  font-size: var(--body-font-size-xs);
+/* Logo styling */
+footer .footer .section:first-child .default-content-wrapper > p:first-child {
+  flex: 0 0 auto;
+  margin: 0;
 }
 
-footer .footer p:first-child,
-footer .footer p:nth-child(5),
-footer .footer p:nth-child(9) {
+footer .footer .section:first-child .default-content-wrapper > p:first-child img {
+  width: 128px;
+  height: auto;
+  display: block;
+}
+
+/* Navigation group - centered */
+footer .footer .section:first-child .default-content-wrapper > .footer-nav-group {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Search icon wrapper */
+footer .footer .section:first-child .default-content-wrapper > p:last-child {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Style the nav links like header */
+footer .footer .section:first-child .footer-nav-group a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+
+footer .footer .section:first-child .footer-nav-group a:hover {
+  color: #ccc;
+}
+
+/* Search icon styling */
+footer .footer .section:first-child span.icon.icon-search {
+  background: #555;
+  padding: 12px;
+  display: inline-flex;
+}
+
+/* Second section: dark footer content */
+footer .footer .section:nth-child(2) {
+  background-color: #202020;
+  color: #ebebeb;
+  padding: 40px 24px 24px;
+}
+
+footer .footer .section:nth-child(2) .default-content-wrapper {
+  margin: auto;
+  max-width: 1200px;
+  display: block;
+}
+
+footer .footer .section:nth-child(2) a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer .footer .section:nth-child(2) a:hover {
+  color: var(--link-hover-color);
+}
+
+footer .footer .section:nth-child(2) p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  display: block;
+  width: 100%;
+}
+
+footer .footer .section:nth-child(2) p:last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  footer .footer .section:nth-child(2) {
+    padding: 40px 32px 24px;
+  }
+}
+
+.sociallinks-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sociallinks-wrapper {
+  margin: 10px;
 }
