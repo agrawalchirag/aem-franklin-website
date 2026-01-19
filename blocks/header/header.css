@@ -8,8 +8,10 @@ header .nav-wrapper {
   left: 0;
   z-index: 100;
   padding: 0;
+
   /* screenshot shows tight header (content handles padding) */
   border-bottom: 1px solid var(--divider-color);
+
   /* thin line under header */
 }
 
@@ -18,11 +20,14 @@ header nav {
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 1264px;
+
   /* screenshot width */
   height: var(--nav-height);
   padding: 0 32px;
+
   /* screenshot side gutters */
   display: grid;
+
   /* mobile-first grid */
   grid-template:
     'hamburger brand tools' var(--nav-height) 'sections sections sections' auto / auto 1fr auto;
@@ -46,6 +51,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     /* distribute left/center/right anchors */
     gap: 32px;
   }
@@ -80,10 +86,9 @@ header nav p {
 
 header nav a:any-link,
 header nav a.button:any-link {
-  color: currentColor;
+  color: #000;
   text-decoration: none;
   background-color: transparent;
-  color: #000;
   font-size: 12px;
   text-transform: uppercase;
 }
@@ -112,7 +117,7 @@ header nav .nav-hamburger button {
 }
 
 header nav .nav-hamburger button:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid currentcolor;
   outline-offset: 2px;
 }
 
@@ -129,7 +134,7 @@ header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
-  background: currentColor;
+  background: currentcolor;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon,
@@ -137,7 +142,7 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::before,
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
   height: 2px;
   border-radius: 2px;
-  background: currentColor;
+  background: currentcolor;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
@@ -177,11 +182,13 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 }
 
 /* BRAND: big WKND logo text or image, aligned left */
+
 header .nav-brand {
   grid-area: brand;
   font-size: clamp(20px, 2.2vw, var(--heading-font-size-m));
   font-weight: 800;
   letter-spacing: 0.08em;
+
   /* matches condensed logo feel */
   line-height: 1;
 }
@@ -235,6 +242,7 @@ header nav .nav-sections ul>li {
     align-items: center;
     margin: 0;
     text-transform: uppercase;
+
     /* screenshot style */
     letter-spacing: 0.04em;
   }
@@ -277,6 +285,7 @@ header nav .nav-tools .search input[type='search'] {
   outline: none;
   font-size: 14px;
   width: 160px;
+
   /* screenshot width */
 }
 

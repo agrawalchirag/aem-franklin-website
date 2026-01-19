@@ -1,3 +1,7 @@
+.sociallinks p {
+  margin: 0;
+}
+
 .sociallinks>div>div p {
   display: flex;
   margin: 0;
@@ -6,10 +10,6 @@
 .sociallinks ul {
   margin: 0;
   padding: 0;
-}
-
-.sociallinks p {
-  margin: 0;
 }
 
 .sociallinks li {
