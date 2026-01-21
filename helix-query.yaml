@@ -3,24 +3,22 @@ version: 1
 indices:
   english:
     include:
-      - /**
+      - '/**'
     exclude:
-      - /nav
-      - /header
-      - /footer
-      - /fragments/**
-      - /docs/**
+      - '/nav'
+      - '/header'
+      - '/footer'
+      - '/fragments/**'
+      - '/docs/**'
     target: /query-index.json
     properties:
       title:
-        select: main h1
-        value: innerHTML
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
       description:
         select: head > meta[name="description"]
-        value: |
-          attribute(el, "content")
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
-        value: |
-          attribute(el, "content")
+        value: attribute(el, "content")
 
