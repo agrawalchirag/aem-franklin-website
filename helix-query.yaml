@@ -15,15 +15,12 @@ indices:
     properties:
       title:
         select: head > title
-        value: |
-          textContent(el)
+        value: textContent
 
       description:
         select: head > meta[name="description"]
-        value: |
-          attribute(el, "content")
+        value: attribute(el, content)
 
       image:
         select: head > meta[property="og:image"]
-        value: |
-          attribute(el, "content")
+        value: attribute(el, content)
