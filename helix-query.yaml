@@ -12,3 +12,15 @@ indices:
       - /docs/**
     target: /query-index.json
     properties:
+      title:
+        select: main h1
+        value: innerHTML
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          attribute(el, "content")
+
