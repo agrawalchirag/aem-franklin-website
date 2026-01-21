@@ -14,8 +14,8 @@ indices:
 
     properties:
       title:
-        selectFirst: head > title
-        value: text(el)
+        select: head > title
+        value: textContent(el)
 
       description:
         selectFirst: head > meta[name="description"]
