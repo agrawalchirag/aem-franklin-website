@@ -1,0 +1,7 @@
+.recent-articles h2::after {
+    border-bottom: 2px solid var(--brand-primary, #ffea00);
+    content: "";
+    display: block;
+    padding-top: 8px;
+    width: 84px;
+}

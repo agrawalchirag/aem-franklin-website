@@ -21,4 +21,3 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: attribute(el, "content")
-

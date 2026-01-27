@@ -15,8 +15,6 @@
   color: dimgray;
   display: block;
   font-size: var(--font-size-small, 14px);
-  margin-top: 1rem;
-  padding: 16px;
 }
 
 .cards .cards-card-body h4 {
@@ -35,7 +33,8 @@
 .cards .cards-card-body p {
   font-size: 14px;
   line-height: 1.5;
-  margin: 0;
+
+  /* margin: 0; */
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
