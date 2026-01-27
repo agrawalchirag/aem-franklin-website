@@ -161,4 +161,13 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Mark active navigation link based on current page path
+  const currentPath = window.location.pathname;
+  navSections.querySelectorAll('a.button').forEach((link) => {
+    const linkPath = new URL(link.href).pathname;
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    }
+  });
 }
