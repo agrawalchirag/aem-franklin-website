@@ -40,7 +40,8 @@ main .carousel div.carousel-text {
   margin: 0 auto;
   background-color: white;
   min-height: 188px;
-  padding: 0 28px;
+  padding: 0 28px; 
+  width: 71pc;
 }
 
 main .carousel div.carousel-text p {

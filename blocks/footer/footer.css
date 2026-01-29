@@ -29,6 +29,10 @@ footer .footer .section:nth-child(2) a:hover {
   color: var(--link-hover-color);
 }
 
+footer p {
+  text-align: justify;
+}
+
 footer .footer .section:nth-child(2) p {
   font-size: 12px;
   line-height: 1.6;
@@ -79,6 +83,7 @@ footer .footer .section:first-child .default-content-wrapper > .footer-nav-group
   justify-content: center;
   align-items: center;
   gap: 32px;
+  padding-left: 40px;
 }
 
 /* Search icon wrapper */

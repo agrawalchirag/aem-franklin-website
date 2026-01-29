@@ -315,3 +315,8 @@ main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none;
 }
+
+.bg-colour {
+  /* background-color: var(--highlight-background-color); */
+  background-color: var(--brand-third, #ebebeb);
+}
