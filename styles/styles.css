@@ -205,13 +205,13 @@ body.activity main {
 }
 
 main input {
-  font-size: 1.25rem;
+  font-size: 20px;
   width: 100%;
-  max-width: 50rem;
+  max-width: 800px;
   display: block;
-  margin-bottom: 1rem;
-  padding: 0.75rem 0.6rem;
-  border-radius: 0.25rem;
+  margin-bottom: 16px;
+  padding: 12px 10px;
+  border-radius: 4px;
   box-sizing: border-box;
   border: 1px solid var(--text-color);
   color: var(--text-color);
@@ -238,8 +238,8 @@ main blockquote {
   color: var(--blockquote-color);
   background-color: var(--blockquote-background-color);
   font-family: var(--heading-font-family);
-  margin: 3rem;
-  text-indent: -1rem;
+  margin: 48px;
+  text-indent: -16px;
   hanging-punctuation: first;
 }
 
