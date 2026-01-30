@@ -1,6 +1,7 @@
-.featured-article-wrapper {
-  padding: 0 !important;
-  margin-top: 50px !important;
+main .featured-article-wrapper,
+.featured-article-wrapper.block {
+  padding: 0;
+  margin-top: 50px;
 }
 
 .featured-article {

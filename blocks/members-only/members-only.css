@@ -88,8 +88,8 @@
 .members-only .members-only-card-body a.button {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #e8e8e8 !important;
-  color: #888 !important;
+  background-color: #e8e8e8;
+  color: #888;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 11px;
@@ -101,8 +101,8 @@
 }
 
 .members-only .members-only-card-body a.button:hover {
-  background-color: #d0d0d0 !important;
-  color: #666 !important;
+  background-color: #d0d0d0;
+  color: #666;
 }
 
 .members-only .members-only-card-image {
