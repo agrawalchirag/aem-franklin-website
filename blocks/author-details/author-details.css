@@ -45,7 +45,7 @@
   letter-spacing: 0.5px;
 }
 
-@media (width <= 768px) {
+@media (width < 768px) {
   .author-details {
     flex-direction: column;
     align-items: flex-start;

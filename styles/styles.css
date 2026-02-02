@@ -256,13 +256,13 @@ img {
   height: auto;
 }
 
-@media (width >= 600px) {
+@media (width >= 768px) {
   main .section {
     padding: 64px 32px;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   :root {
     --heading-font-size-xxl: 40px;
     --heading-font-size-xl: 36px;

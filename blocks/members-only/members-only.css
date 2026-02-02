@@ -137,7 +137,7 @@
   z-index: 1;
 }
 
-@media (width <= 768px) {
+@media (width < 768px) {
   .members-only > ul {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }

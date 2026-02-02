@@ -55,41 +55,35 @@ footer .footer .section:first-child {
 
 footer .footer .section:first-child .default-content-wrapper {
   margin: 0;
-  max-width: 1264px;
-  padding: 0 32px;
-  height: var(--nav-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
+  padding: 16px;
+  display: block;
 }
 
 /* Logo styling */
-footer .footer .section:first-child .default-content-wrapper > p:first-child {
-  flex: 0 0 auto;
-  margin: 0;
+footer .footer .section:first-child .default-content-wrapper>p:first-child {
+  margin: 0 0 16px;
+  text-align: center;
 }
 
-footer .footer .section:first-child .default-content-wrapper > p:first-child img {
+footer .footer .section:first-child .default-content-wrapper>p:first-child img {
   width: 128px;
   height: auto;
   display: block;
 }
 
-/* Navigation group - centered */
-footer .footer .section:first-child .default-content-wrapper > .footer-nav-group {
-  flex: 1 1 auto;
+/* Navigation group - mobile stacked */
+footer .footer .section:first-child .default-content-wrapper>.footer-nav-group {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  padding-left: 40px;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 /* Search icon wrapper */
-footer .footer .section:first-child .default-content-wrapper > p:last-child {
-  flex: 0 0 auto;
+footer .footer .section:first-child .default-content-wrapper>p:last-child {
   margin: 0;
+  text-align: center;
 }
 
 /* Style the nav links like header */
@@ -113,7 +107,41 @@ footer .footer .section:first-child span.icon.icon-search {
   display: inline-flex;
 }
 
-@media (width >= 900px) {
+@media (width >=1024px) {
+  /* Desktop layout for first section */
+  footer .footer .section:first-child .default-content-wrapper {
+    max-width: 1264px;
+    padding: 0 32px;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  footer .footer .section:first-child .default-content-wrapper>p:first-child {
+    flex: 1 1 auto;
+    flex-direction: row;
+    gap: 32px;
+    padding-left: 40px;
+    margin-bottom: 0;
+  }
+
+  footer .footer .section:first-child .default-content-wrapper>.footer-nav-group {
+    flex: 1 1 auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    padding-left: 40px;
+    margin-bottom: 0;
+  }
+
+  footer .footer .section:first-child .default-content-wrapper>p:last-child {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+
+  /* Desktop padding for second section */
   footer .footer .section:nth-child(2) {
     padding: 40px 32px 24px;
   }
