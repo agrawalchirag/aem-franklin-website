@@ -13,7 +13,7 @@ main .featured-article-wrapper,
 
 .featured-article > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 /* Image container - first div */
@@ -21,6 +21,8 @@ main .featured-article-wrapper,
   display: flex;
   flex-direction: column;
   flex: 2;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .featured-article > div > div:first-child picture {
@@ -44,6 +46,8 @@ main .featured-article-wrapper,
   flex: 1;
   background-color: #ebebeb;
   padding: 3.5em 2em 2em;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .featured-article > div > div:last-child p {
@@ -69,5 +73,13 @@ main .featured-article-wrapper,
 @media (width >= 1024px) {
   .featured-article > div {
     flex-direction: row;
+  }
+
+  .featured-article > div > div:first-child {
+    margin-right: 0;
+  }
+
+  .featured-article > div > div:last-child {
+    margin-left: 0;
   }
 }
