@@ -16,25 +16,45 @@ const ICONS = {
   `,
 };
 
-export default function decorate(block) {
+/**
+ * Injects social icons into anchor elements based on title attribute
+ * @param {HTMLElement} li - List item containing social links
+ */
+function injectSocialIcons(li) {
+  li.querySelectorAll('a[title]').forEach((a) => {
+    const key = a.title.toLowerCase();
+    if (ICONS[key]) {
+      a.innerHTML = ICONS[key];
+      a.classList.add('sociallinks-icon', `sociallinks-${key}`);
+      a.setAttribute('aria-label', key);
+    }
+  });
+}
+
+/**
+ * Converts block rows to list items with social icons
+ * @param {HTMLElement} block - The sociallinks block element
+ * @returns {HTMLUListElement} Unordered list of social links
+ */
+function convertToList(block) {
   const ul = document.createElement('ul');
 
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
-
     while (row.firstElementChild) li.append(row.firstElementChild);
-    li.querySelectorAll('a[title]').forEach((a) => {
-      const key = a.title.toLowerCase();
-      if (ICONS[key]) {
-        a.innerHTML = ICONS[key];
-        a.classList.add('sociallinks-icon', `sociallinks-${key}`);
-        a.setAttribute('aria-label', key);
-      }
-    });
-
+    injectSocialIcons(li);
     ul.append(li);
   });
 
+  return ul;
+}
+
+/**
+ * Decorates the sociallinks block
+ * @param {HTMLElement} block - The sociallinks block element
+ */
+export default function decorate(block) {
+  const ul = convertToList(block);
   block.textContent = '';
   block.append(ul);
 }

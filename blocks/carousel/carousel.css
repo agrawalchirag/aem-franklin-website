@@ -12,21 +12,17 @@ main .carousel {
 }
 
 main .carousel picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  box-sizing: border-box;
-  object-fit: cover;
+  position: relative;
+  z-index: 0;
   width: 100%;
-  height: 100%;
-  object-position: center;
+  display: block;
 }
 
 main .carousel img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
-  height: 100%;
-  object-position: 90%;
+  height: auto;
+  display: block;
 }
 
 main .carousel>div {
@@ -34,23 +30,53 @@ main .carousel>div {
   flex-shrink: 0;
   scroll-snap-align: start;
   position: relative;
-  min-height: 580px;
-  align-items: flex-end;
   display: flex;
+  flex-direction: column;
 }
 
 main .carousel div.carousel-text {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
   background-color: white;
   min-height: 188px;
-  padding: 0 28px;
-  width: 71pc;
+  padding: 0 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (width >= 768px) {
+  main .carousel picture {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    height: 100%;
+  }
+
+  main .carousel img {
+    object-fit: cover;
+    height: 100%;
+    object-position: 90%;
+  }
+
+  main .carousel>div {
+    min-height: 580px;
+    align-items: flex-end;
+    flex-direction: row;
+  }
+
+  main .carousel div.carousel-text {
+    margin: 0 auto;
+    padding: 0 28px;
+    width: 71pc;
+  }
 }
 
 main .carousel div.carousel-text p {
-  margin: 10px 0 16px;
-  line-height: 1.2;
+  font-size: 17px;
+  line-height: 1.75;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 main .carousel div.carousel-text h2 {
@@ -71,13 +97,24 @@ main .carousel-wrapper {
 }
 
 main .carousel-wrapper .carousel-buttons {
-  text-align: center;
+  text-align: left;
   margin-top: 0;
   position: absolute;
   display: flex;
   right: 0;
   left: 0;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 14px;
+  padding-top: 14px;
+}
+
+@media (width >= 768px) {
+  main .carousel-wrapper .carousel-buttons {
+    text-align: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-top: 0;
+  }
 }
 
 main .carousel-buttons button {

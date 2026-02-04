@@ -3,9 +3,9 @@ import {
 } from '../../scripts/lib-franklin.js';
 
 /**
- * Loads a fragment.
- * @param {string} path The path to the fragment
- * @returns {Document} The document
+ * Loads a fragment from a given path
+ * @param {string} path - The path to the fragment
+ * @returns {Document|null} The parsed document or null if failed
  */
 async function loadFragment(path) {
   if (path && path.startsWith('/')) {
@@ -19,19 +19,24 @@ async function loadFragment(path) {
 }
 
 /**
- * @param {HTMLElement} $block The header block element
+ * Extracts metadata from the document
+ * @param {Document} doc - The document to extract metadata from
+ * @returns {Object} Object containing title and description
  */
-export default async function decorate($block) {
-  const link = $block.querySelector('a');
-  const path = link ? link.getAttribute('href') : $block.textContent.trim();
-  const doc = await loadFragment(path);
-  if (!doc) {
-    return;
-  }
-  // find metadata
+function extractMetadata(doc) {
   const title = getMetadata('og:title', doc);
   const desc = getMetadata('og:description', doc);
+  return { title, desc };
+}
 
+/**
+ * Creates the text section with pretitle, heading, description, and link
+ * @param {string} title - The article title
+ * @param {string} desc - The article description
+ * @param {Element} link - The read more link element
+ * @returns {Element} The text section element
+ */
+function createTextSection(title, desc, link) {
   const $pre = document.createElement('p');
   $pre.classList.add('pretitle');
   $pre.textContent = 'Featured Article';
@@ -50,13 +55,45 @@ export default async function decorate($block) {
   $text.classList.add('text');
   $text.append($pre, $h2, $p, $link);
 
+  return $text;
+}
+
+/**
+ * Creates the image section with hero picture
+ * @param {Document} doc - The document to extract hero image from
+ * @returns {Element} The image section element
+ */
+function createImageSection(doc) {
   const $image = document.createElement('div');
   $image.classList.add('image');
-  // find image
+
   const $hero = doc.querySelector('body > main picture');
   if ($hero) {
     $image.append($hero);
   }
 
+  return $image;
+}
+
+/**
+ * Decorates the featured article block
+ * @param {HTMLElement} $block - The featured article block element
+ */
+export default async function decorate($block) {
+  const link = $block.querySelector('a');
+  const path = link ? link.getAttribute('href') : $block.textContent.trim();
+
+  // Load fragment document
+  const doc = await loadFragment(path);
+  if (!doc) {
+    return;
+  }
+
+  // Extract metadata and create sections
+  const { title, desc } = extractMetadata(doc);
+  const $text = createTextSection(title, desc, link);
+  const $image = createImageSection(doc);
+
+  // Replace block content
   $block.replaceChildren($image, $text);
 }

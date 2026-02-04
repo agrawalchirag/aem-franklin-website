@@ -44,14 +44,14 @@ main .featured-article-wrapper,
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: #ebebeb;
+  background-color: var(--text-color-light);
   padding: 3.5em 2em 2em;
   margin-left: 15px;
   margin-right: 15px;
 }
 
 .featured-article > div > div:last-child p {
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   margin: 0 0 1em;
   line-height: 1.75;
 }
@@ -61,7 +61,7 @@ main .featured-article-wrapper,
 }
 
 .featured-article > div > div:last-child p strong {
-  font-size: 18px;
+  font-size: var(--body-font-size-s);
   font-weight: 700;
 }
 

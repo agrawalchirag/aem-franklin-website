@@ -160,6 +160,25 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
+
+  // Create header-top div
+  const headerTop = document.createElement('div');
+  headerTop.className = 'header-top';
+
+  // Create sign in button wrapper
+  const signInWrapper = document.createElement('div');
+  signInWrapper.className = 'header-top-signin-wrapper';
+
+  // Create sign in button
+  const signInButton = document.createElement('a');
+  signInButton.href = '#';
+  signInButton.textContent = 'Sign In';
+  signInButton.className = 'header-top-signin';
+
+  signInWrapper.append(signInButton);
+  headerTop.append(signInWrapper);
+
+  block.append(headerTop);
   block.append(navWrapper);
 
   // Mark active navigation link based on current page path

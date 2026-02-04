@@ -1,9 +1,44 @@
+header .header-top {
+  background-color: var(--color-black);
+  width: 100%;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+}
+
+header .header-top-signin-wrapper {
+  margin-left: 0;
+}
+
+@media (width >= 768px) {
+  header .header-top-signin-wrapper {
+    margin-left: 75%;
+  }
+}
+
+header .header-top-signin {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+header .header-top-signin:hover {
+  text-decoration: underline;
+}
+
 header .nav-wrapper {
   background-color: var(--background-color);
   color: var(--text-color);
   width: 100%;
   position: fixed;
-  top: 0;
+  top: 25px;
   left: 0;
   z-index: 100;
   padding: 0;
@@ -22,7 +57,7 @@ header nav {
   max-width: 1264px;
 
   /* screenshot width */
-  height: var(--nav-height);
+  height: 125px;
   padding: 0 32px;
 
   /* screenshot side gutters */
@@ -30,7 +65,7 @@ header nav {
 
   /* mobile-first grid */
   grid-template:
-    'hamburger brand tools' var(--nav-height) 'sections sections sections' auto / auto 1fr auto;
+    'hamburger brand tools' 125px 'sections sections sections' auto / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
   font-family: var(--body-font-family);
@@ -46,11 +81,12 @@ header nav[aria-expanded='true'] {
 }
 
 /* DESKTOP: flex layout with a centered sections block */
-@media (width >=900px) {
+@media (width >= 768px) {
   header nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: var(--nav-height);
 
     /* distribute left/center/right anchors */
     gap: 32px;
@@ -102,11 +138,11 @@ header nav a.button:any-link {
 header .nav-sections a:any-link:hover,
 header .nav-sections a.button:any-link:hover,
 header .nav-sections a.button.active {
-  background-color: #ffea00;
+  background-color: var(--color-yellow);
 }
 
 header span.icon.icon-search {
-  background: #ccc;
+  background: var(--color-light-gray);
   padding: 12px;
 }
 
@@ -260,11 +296,11 @@ header nav .nav-sections ul>li {
   }
 
   header nav .nav-sections a {
-    color: #333;
+    color: var(--color-dark-gray);
   }
 
   header nav .nav-sections a:hover {
-    color: #000;
+    color: var(--color-black);
   }
 
   header .nav-wrapper {
@@ -286,7 +322,7 @@ header nav .nav-tools .search {
   align-items: center;
   gap: 8px;
   background: var(--light-color);
-  color: #333;
+  color: var(--color-dark-gray);
   padding: 10px 14px;
   border-radius: 6px;
 }
@@ -295,7 +331,7 @@ header nav .nav-tools .search input[type='search'] {
   border: 0;
   background: transparent;
   outline: none;
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   width: 160px;
 
   /* screenshot width */
@@ -312,13 +348,13 @@ header nav .nav-tools .locale {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
-  color: #333;
+  font-size: var(--body-font-size-xs);
+  color: var(--color-dark-gray);
 }
 
 /* MAIN CONTENT offset so it doesn’t hide under fixed header */
 main {
-  margin-top: var(--nav-height);
+  margin-top: calc(var(--nav-height) + 25px);
 }
 
 /* Optional reduced motion polish */

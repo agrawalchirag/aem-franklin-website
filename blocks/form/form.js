@@ -639,35 +639,56 @@ function buildForm(fields, submit) {
 }
 
 /**
+ * Fetches form data from the specified source
+ * @param {string} source - URL of the form data JSON
+ * @returns {Promise<Array>} Form fields data
+ */
+async function fetchFormData(source) {
+  const resp = await fetch(new URL(source, window.location.origin));
+  if (!resp.ok) throw new Error(`${resp.status}: ${resp.statusText}`);
+  const { data } = await resp.json();
+  if (!data) throw new Error(`No form fields at ${source}`);
+  return data;
+}
+
+/**
+ * Initializes an intersection observer to lazy-load the form
+ * @param {HTMLElement} block - Form block element
+ * @param {string} source - URL of the form data JSON
+ * @param {string} submit - Submit endpoint URL
+ */
+function initializeFormObserver(block, source, submit) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(async (entry) => {
+      if (entry.isIntersecting) {
+        try {
+          const data = await fetchFormData(source);
+          const form = buildForm(data, submit);
+          block.replaceChildren(form);
+          block.removeAttribute('style');
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Could not build form from', source, error);
+          block.parentElement.remove();
+        }
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0 });
+
+  observer.observe(block);
+}
+
+/**
  * Initializes form block with data from JSON endpoint
  * @param {HTMLElement} block - Form block element
  */
 export default function decorate(block) {
   block.style.visibility = 'hidden';
   const [source, submit] = [...block.querySelectorAll('a[href]')].map((a) => a.href);
-  if (source) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(async (entry) => {
-        if (entry.isIntersecting) {
-          try {
-            const resp = await fetch(new URL(source, window.location.origin));
-            if (!resp.ok) throw new Error(`${resp.status}: ${resp.statusText}`);
-            const { data } = await resp.json();
-            if (!data) throw new Error(`No form fields at ${source}`);
-            const form = buildForm(data, submit);
-            block.replaceChildren(form);
-            block.removeAttribute('style');
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error('Could not build form from', source, error);
-            block.parentElement.remove();
-          }
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0 });
 
-    observer.observe(block);
+  if (source) {
+    initializeFormObserver(block, source, submit);
   } else {
     // eslint-disable-next-line no-console
     console.error('Unable to create form without source');
