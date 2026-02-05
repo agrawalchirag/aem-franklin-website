@@ -4,21 +4,15 @@ header .header-top {
   min-height: 25px;
   display: flex;
   align-items: center;
-  padding: 0 32px;
+  justify-content: space-between;
+  padding: 0 16px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 101;
-}
-
-header .header-top-signin-wrapper {
-  margin-left: 0;
-}
-
-@media (width >= 768px) {
-  header .header-top-signin-wrapper {
-    margin-left: 75%;
-  }
+  color: var(--color-white);
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
 }
 
 header .header-top-signin {
@@ -27,10 +21,65 @@ header .header-top-signin {
   font-size: var(--body-font-size-xs);
   text-transform: uppercase;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 header .header-top-signin:hover {
   text-decoration: underline;
+}
+
+header .header-top .icon {
+  height: 20px;
+  width: 22px;
+  margin-right: 6px;
+}
+
+header .header-chevron-down {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+header .header-chevron-down::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  transform: rotate(45deg);
+  left: 4px;
+  top: 2px;
+}
+
+header .header-markets {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+@media (width >= 768px) {
+  header .header-top-signin {
+    margin-left: auto;
+    margin-right: 30px;
+  }
+
+  header .header-markets {
+    margin-right: 200px;
+  }
+}
+
+header .header-top .icon svg {
+  height: 100%;
 }
 
 header .nav-wrapper {
@@ -142,8 +191,15 @@ header .nav-sections a.button.active {
 }
 
 header span.icon.icon-search {
-  background: var(--color-light-gray);
-  padding: 12px;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+header span.icon.icon-search svg {
+  width: 18px;
+  height: 18px;
+  fill: currentcolor;
 }
 
 /* HAMBURGER (hidden desktop) */
@@ -321,10 +377,10 @@ header nav .nav-tools .search {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--light-color);
+  background: #f5f5f5;
   color: var(--color-dark-gray);
   padding: 10px 14px;
-  border-radius: 6px;
+  
 }
 
 header nav .nav-tools .search input[type='search'] {

@@ -8,6 +8,12 @@
   gap: 24px;
 }
 
+@media (width >= 768px) {
+  .cards>ul {
+    padding-right: 0;
+  }
+}
+
 .cards>ul>li {
   background-color: var(--background-color);
 }

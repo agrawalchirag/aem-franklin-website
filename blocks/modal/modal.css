@@ -1,0 +1,150 @@
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal dialog::backdrop {
+  background-color: rgb(19 19 19 / 75%);
+}
+
+.modal dialog {
+  overscroll-behavior: none;
+  overflow-y: hidden;
+  width: calc(100vw - 48px);
+  max-width: 900px;
+  max-height: calc(100dvh - (2 * var(--header-height)));
+  padding: 0;
+  border: 1px solid var(--dark-color);
+}
+
+.modal dialog .modal-content {
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  width: 100%;
+  max-height: calc(100dvh - (2 * var(--header-height)) - 48px);
+  padding: 24px;
+  padding-top: 0;
+  margin-top: 44px;
+}
+
+@media (width >= 900px) {
+  .modal dialog {
+    width: calc(100vw - 64px);
+  }
+  
+  .modal dialog .modal-content {
+    max-height: calc(100dvh - (2 * var(--header-height)) - 64px);
+    padding: 32px;
+    padding-top: 0;
+  }
+}
+
+.modal .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  line-height: 0;
+}
+
+.modal .close-button .icon.icon-close {
+  content: '';
+  width: 24px;
+  height: 24px;
+}
+
+.modal .close-button .icon.icon-close::before,
+.modal .close-button .icon.icon-close::after {
+  content: '';
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentcolor;
+}
+
+.modal .close-button .icon.icon-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg)
+}
+
+.modal dialog .section {
+  padding: 0;
+}
+
+/* Sign-in modal specific styles */
+.modal dialog h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 5px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.modal dialog h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--highlight-background-color);
+}
+
+.modal dialog h3 {
+  text-align: center;
+  color: var(--color-medium-gray);
+  font-size: 16px;
+  margin: 10px 0 30px;
+}
+
+.modal dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal dialog input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal dialog input:focus {
+  outline: none;
+  border-color: var(--highlight-background-color);
+}
+
+.modal dialog .button-container {
+  text-align: center;
+  margin-top: -10px;
+}
+
+.modal dialog .button {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+}
+
+.modal dialog .button.primary {
+  background-color: var(--highlight-background-color);
+  color: var(--color-black);
+  font-weight: 700;
+  padding: 14px 32px;
+  margin-top: 10px;
+}

@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -49,6 +49,16 @@ function openOnKeydown(e) {
 
 function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
+}
+
+/**
+ * Collapses all nav sections
+ * @param {Element} sections The container element
+ */
+function collapseAllNavSections(sections) {
+  sections.querySelectorAll(':scope > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', 'false');
+  });
 }
 
 /**
@@ -139,7 +149,7 @@ export default async function decorate(block) {
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
+          collapseAllNavSections(navSections.querySelector(':scope .default-content-wrapper > ul'));
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
@@ -165,21 +175,54 @@ export default async function decorate(block) {
   const headerTop = document.createElement('div');
   headerTop.className = 'header-top';
 
-  // Create sign in button wrapper
-  const signInWrapper = document.createElement('div');
-  signInWrapper.className = 'header-top-signin-wrapper';
-
   // Create sign in button
   const signInButton = document.createElement('a');
-  signInButton.href = '#';
+  signInButton.href = '/modals/sign-in';
   signInButton.textContent = 'Sign In';
   signInButton.className = 'header-top-signin';
 
-  signInWrapper.append(signInButton);
-  headerTop.append(signInWrapper);
+  // Create markets dropdown
+  const marketsDiv = document.createElement('div');
+  marketsDiv.className = 'header-markets';
+  marketsDiv.innerHTML = '<span class="icon icon-flag-us"></span>EN-US<span class="header-chevron-down"></span>';
+
+  headerTop.append(signInButton);
+  headerTop.append(marketsDiv);
+  decorateIcons(headerTop);
 
   block.append(headerTop);
   block.append(navWrapper);
+
+  // Add search functionality
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    const searchLink = navTools.querySelector('a[href*="search"]');
+    if (searchLink) {
+      const searchContainer = document.createElement('div');
+      searchContainer.className = 'search';
+
+      const searchIcon = document.createElement('span');
+      searchIcon.className = 'icon icon-search';
+
+      const searchInput = document.createElement('input');
+      searchInput.type = 'search';
+      searchInput.placeholder = 'Search';
+      searchInput.setAttribute('aria-label', 'Search');
+
+      searchContainer.append(searchIcon);
+      searchContainer.append(searchInput);
+
+      searchLink.replaceWith(searchContainer);
+      decorateIcons(searchContainer);
+
+      // Handle search input
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && searchInput.value.trim()) {
+          window.location.href = `/search?q=${encodeURIComponent(searchInput.value.trim())}`;
+        }
+      });
+    }
+  }
 
   // Mark active navigation link based on current page path
   const currentPath = window.location.pathname;

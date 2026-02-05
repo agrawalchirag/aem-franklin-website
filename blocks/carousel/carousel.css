@@ -130,3 +130,8 @@ main .carousel-buttons button {
 main .carousel-buttons button.selected {
   background-color: var(--link-color);
 }
+
+/* Hide dots when carousel has only one slide */
+main .carousel-wrapper .carousel-buttons:has(button:only-child) {
+  display: none;
+}
