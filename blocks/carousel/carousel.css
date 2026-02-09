@@ -135,3 +135,71 @@ main .carousel-buttons button.selected {
 main .carousel-wrapper .carousel-buttons:has(button:only-child) {
   display: none;
 }
+
+/* stylelint-disable selector-class-pattern */
+
+/* Carousel navigation arrows */
+.cmp-carousel__actions {
+  float: right;
+  margin-top: 0;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+/* Hide arrows when carousel has only one slide */
+.carousel-wrapper:has(.carousel-buttons button:only-child) .cmp-carousel__actions {
+  display: none;
+}
+
+.cmp-carousel__action {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+
+  /* transition: opacity 0.3s ease; */
+}
+
+.cmp-carousel__action-text {
+  display: none;
+}
+
+.cmp-carousel__action-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-black);
+  transform: translate(-50%, -50%);
+}
+
+.cmp-carousel__action--next .cmp-carousel__action-icon::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-black);
+  border-right: 2px solid var(--color-black);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.cmp-carousel__action--previous .cmp-carousel__action-icon::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-black);
+  border-left: 2px solid var(--color-black);
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* stylelint-enable selector-class-pattern */

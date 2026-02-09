@@ -98,4 +98,48 @@ export default function decorate(block) {
   // Create and append navigation buttons
   const navigationButtons = createNavigationButtons(block);
   block.parentElement.append(navigationButtons);
+
+  // Create arrow navigation
+  const arrowActions = document.createElement('div');
+  arrowActions.className = 'cmp-carousel__actions';
+
+  // Previous button
+  const prevButton = document.createElement('button');
+  prevButton.className = 'cmp-carousel__action cmp-carousel__action--previous';
+  prevButton.type = 'button';
+  prevButton.setAttribute('aria-label', 'Previous');
+  prevButton.innerHTML = '<span class="cmp-carousel__action-icon"></span><span class="cmp-carousel__action-text">Previous</span>';
+
+  // Next button
+  const nextButton = document.createElement('button');
+  nextButton.className = 'cmp-carousel__action cmp-carousel__action--next';
+  nextButton.type = 'button';
+  nextButton.setAttribute('aria-label', 'Next');
+  nextButton.innerHTML = '<span class="cmp-carousel__action-icon"></span><span class="cmp-carousel__action-text">Next</span>';
+
+  // Add click handlers
+  prevButton.addEventListener('click', () => {
+    const currentIndex = [...block.children].findIndex((slide) => {
+      const rect = slide.getBoundingClientRect();
+      const parentRect = block.getBoundingClientRect();
+      return Math.abs(rect.left - parentRect.left) < 10;
+    });
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : block.children.length - 1;
+    scrollToSlide(block, block.children[prevIndex]);
+    updateSelectedButton(navigationButtons, navigationButtons.children[prevIndex]);
+  });
+
+  nextButton.addEventListener('click', () => {
+    const currentIndex = [...block.children].findIndex((slide) => {
+      const rect = slide.getBoundingClientRect();
+      const parentRect = block.getBoundingClientRect();
+      return Math.abs(rect.left - parentRect.left) < 10;
+    });
+    const nextIndex = (currentIndex + 1) % block.children.length;
+    scrollToSlide(block, block.children[nextIndex]);
+    updateSelectedButton(navigationButtons, navigationButtons.children[nextIndex]);
+  });
+
+  arrowActions.append(prevButton, nextButton);
+  block.parentElement.append(arrowActions);
 }
