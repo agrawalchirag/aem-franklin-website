@@ -20,6 +20,17 @@ footer .footer .section:nth-child(2) .default-content-wrapper {
   display: block;
 }
 
+/* Footer social icons background */
+footer .sociallinks a.button,
+footer .sociallinks a {
+  display: inline;
+  background-color: var(--brand-third);
+  color: var(--color-black);
+  padding: 10px;
+  margin: 0;
+  border: none;
+}
+
 footer .footer .section:nth-child(2) a {
   color: var(--color-white);
   text-decoration: underline;

@@ -70,13 +70,11 @@
 }
 
 .details .sociallinks a.button {
-  width: 28px;
-  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #fff;
+  color: var(--brand-third);
 }
 
 .details .sociallinks .icon {

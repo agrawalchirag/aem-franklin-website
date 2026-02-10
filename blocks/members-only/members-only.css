@@ -49,6 +49,30 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Lock icon for members-only content */
+.members-only > ul > li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 42px;
+  background: linear-gradient(to top left, transparent 0%, transparent 50%, var(--color-yellow, #ffea00) 50%, var(--color-yellow, #ffea00) 100%);
+  z-index: 2;
+}
+
+.members-only > ul > li::after {
+  content: "🔒";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 22px;
+  z-index: 3;
+  color: #000;
+  filter: grayscale(100%) brightness(0);
 }
 
 .members-only .members-only-card {
@@ -69,6 +93,7 @@
   margin: 0 0 12px;
   font-size: 18px;
   font-weight: 700;
+  font-family: var(--body-font-family);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #333;
@@ -113,7 +138,6 @@
 }
 
 .members-only .members-only-card-image::before {
-  content: '🔒';
   position: absolute;
   top: 0;
   left: 0;

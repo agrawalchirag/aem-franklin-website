@@ -18,6 +18,7 @@
   --color-dark-gray: #333;
   --color-medium-gray: #555;
   --color-light-gray: #ccc;
+  --brand-third: #ebebeb;
   --link-color: black;
   --link-hover-color: black;
   --background-color: #fff;
@@ -121,7 +122,6 @@ body.article h2::after {
 }
 
 h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
 h4 { font-size: var(--heading-font-size-m) }
 h5 { font-size: var(--heading-font-size-s) }
 h6 { font-size: var(--heading-font-size-xs) }

@@ -10,6 +10,8 @@
 .sociallinks ul {
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 0;
 }
 
 .sociallinks li {
@@ -17,14 +19,57 @@
 }
 
 .sociallinks a {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  padding: 10px 15px;
-  background: #ebebeb;
-  color: var(--background-color);
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  background: #202020;
+  background-color: #202020;
+  color: #fff;
+  border: none;
+}
+
+.sociallinks a.button {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  background: #202020;
+  background-color: #202020;
+  color: #fff;
+  border: none;
+}
+
+.sociallinks a svg {
+  width: 20px;
+  height: 20px;
+  fill: currentcolor;
 }
 
 .sociallinks-icon:hover svg {
-  fill: var(--link-hover-color);
+  opacity: 0.8;
+}
+
+.sociallinks a.button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentcolor;
+}
+
+.sociallinks a svg path {
+  fill: currentcolor;
+}
+
+.sociallinks a.button svg path {
+  fill: currentcolor;
+}
+
+.sociallinks a.button:hover svg {
+  opacity: 0.8;
 }
